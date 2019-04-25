@@ -36,6 +36,7 @@
     },
     "_moduleAliases": {
         "@config": "config/config.json",
+        "@errors": "errors/index.ts",
         "@models": "model/index.js",
         "@typings": "typings/index.js"
     }
