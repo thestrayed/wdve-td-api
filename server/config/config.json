@@ -1,0 +1,10 @@
+{
+    "development": {
+        "host": "wdve-td-db",
+        "database": "postgres",
+        "username": "postgres",
+        "password": null,
+        "dialect": "postgres",
+        "seederStorage": "sequelize"
+    }
+}

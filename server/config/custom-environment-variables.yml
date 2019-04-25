@@ -1,0 +1,7 @@
+wdve-td:
+  database:
+    dialect: DB_DIALECT
+    name: DB_NAME
+    host: DB_HOST
+    username: DB_USERNAME
+    password: DB_PASSWORD
