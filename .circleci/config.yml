@@ -8,6 +8,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Check current folder
+          command: pwd
+      - run:
           name: Navigate to correct folder
           command: cd server
       - run:
