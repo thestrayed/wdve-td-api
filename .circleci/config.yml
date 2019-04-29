@@ -13,7 +13,7 @@ jobs:
           command: ls -la && pwd
       - run:
           name: Navigate to correct folder
-          command: cd server
+          command: cd server && ls -la
       - run:
           name: Debug folder
           command: ls -la && pwd
