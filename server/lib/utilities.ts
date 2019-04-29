@@ -1,7 +1,7 @@
 import { ErrorRequestHandler, NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import _ from 'lodash';
 
-import { MethodLowercase, Route } from '../typings';
+import { MethodLowercase, Route } from '@typings';
 
 function isAsyncFunction(fn: Function): Boolean {
     return typeof fn === 'function' && fn.constructor && fn.constructor.name === 'AsyncFunction';
