@@ -7,3 +7,7 @@ export interface PlaceModel extends BaseModel<PlaceModel>, SoftDeleteBaseModel {
 }
 
 export type PlaceModelStatic = BaseModelStatic<PlaceModel>;
+
+export interface IPlaceService {
+    all(): Promise<PlaceModel[]>;
+}
