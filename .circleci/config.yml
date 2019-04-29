@@ -8,8 +8,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check current folder
-          command: pwd
+          name: Debug folder
+          command: ls -la && pwd
       - run:
           name: Navigate to correct folder
           command: cd server
