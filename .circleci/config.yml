@@ -10,6 +10,9 @@ jobs:
       - run:
           name: Navigate to correct folder
           command: cd server
+      - run:
+          name: Debug folder
+          command: ls -la && pwd
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
