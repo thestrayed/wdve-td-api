@@ -6,6 +6,7 @@
     "scripts": {
         "db:migrate": "sequelize db:migrate",
         "dev": "yarn db:migrate && ts-node-dev --respawn --transpileOnly server.ts",
+        "lint": "tslint --project tsconfig.json",
         "test": "jest"
     },
     "dependencies": {
