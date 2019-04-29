@@ -1,14 +1,14 @@
 import HttpStatus from 'http-status';
 
-import { ErrorBase, Meta } from '@typings';
+import { Meta } from '@typings';
 
-class ValidationError extends ErrorBase {
+class ValidationError extends Error {
     constructor(
         public message: string,
-        public meta: Meta = {},
+        public meta: Meta,
         public statusCode: number = HttpStatus.BAD_REQUEST,
     ) {
-        super(message, meta, statusCode);
+        super(message);
     }
 }
 
