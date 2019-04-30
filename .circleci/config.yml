@@ -3,34 +3,17 @@ jobs:
   build:
     docker:
       - image: circleci/node
-    working_directory: ~/repo
+    working_directory: ~/repo/server
 
     steps:
       - checkout:
-          path: ~/repo/server
-      - run:
-          name: Debug folder
-          command: ls -la && pwd
-      - run:
-          name: Navigate to correct folder
-          command: cd server && ls -la
-      - run:
-          name: Debug folder
-          command: ls -la && pwd
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+          path: ~/repo
       - run:
           name: Install
-          command: ls -la && yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          command: yarn install
       - run:
           name: Lint
-          command: ls -la && yarn lint
+          command: yarn lint
       - run:
           name: Test
-          command: ls -la && yarn test
+          command: yarn test
