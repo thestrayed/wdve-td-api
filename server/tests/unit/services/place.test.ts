@@ -16,4 +16,16 @@ describe('services/place', () => {
 
         expect([]).toEqual(places);
     });
+
+    it('should return place', async () => {
+        const id = 1;
+        const place = await placeService.get(id);
+
+        expect({
+            id,
+            name: 'place',
+            latitude: '100',
+            longtitude: '100',
+        }).toEqual(place);
+    });
 });
