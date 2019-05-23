@@ -3,7 +3,7 @@ import path from 'path';
 import { Sequelize } from 'sequelize';
 
 import config from '@config';
-import { DatabaseModel, DatabaseConfig, Environments } from '../typings';
+import { DatabaseModel, DatabaseConfig, Environments } from '@typings/db';
 
 const db = {} as DatabaseModel;
 
