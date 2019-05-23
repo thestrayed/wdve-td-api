@@ -3,7 +3,7 @@ import Joi, { ValidationErrorItem, ValidationOptions } from '@hapi/joi';
 import _ from 'lodash';
 
 import { ValidationError } from '@errors';
-import { Meta } from '@typings';
+import { Meta } from '@typings/errors';
 
 const expectedRequestFieldNames: string[] = [
     'body',
