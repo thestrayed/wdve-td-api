@@ -9,4 +9,4 @@ services:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s
     environment:
-      - DATABASE_NAME=postgres-test
+      - POSTGRES_DB=postgres-test
