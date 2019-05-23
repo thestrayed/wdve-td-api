@@ -1,7 +1,7 @@
 import { ErrorRequestHandler, NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import _ from 'lodash';
 
-import { MethodLowercase, Route } from '@typings';
+import { MethodLowercase, Route } from '@typings/utilities';
 
 function isAsyncFunction(fn: Function): Boolean {
     return typeof fn === 'function' && fn.constructor && fn.constructor.name === 'AsyncFunction';
@@ -29,18 +29,13 @@ function wrapAll(fns: any[]): any[] {
 
 export function setRoutes(router: Router, routes: Route[]): void {
     routes.forEach((route) => {
-        if (!route.handler) {
-            return;
-        }
-
         let args = [];
+
         if (route.middleware) {
             args.push(wrapAll(route.middleware));
         }
 
-        if (route.handler) {
-            args.push(wrap(route.handler));
-        }
+        args.push(wrap(route.handler));
 
         args = _.flatten(args);
 
