@@ -1,7 +1,7 @@
 version: '2.4'
 services:
   db:
-    image: postgres
+    image: postgres:alpine
     container_name: wdve-td-db
     ports:
       - "5432:5432"
