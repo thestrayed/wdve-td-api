@@ -31,16 +31,20 @@
         "@types/jest": "^24.0.11",
         "@types/lodash": "^4.14.123",
         "@types/node": "^11.13.5",
+        "@types/supertest": "^2.0.7",
+        "@types/umzug": "^2.2.1",
         "@types/validator": "^10.11.0",
         "faker": "^4.1.0",
         "jest": "^24.7.1",
         "node-mocks-http": "^1.7.3",
         "sequelize-cli": "^5.4.0",
+        "supertest": "^4.0.2",
         "ts-jest": "^24.0.2",
         "ts-node": "^8.0.3",
         "ts-node-dev": "^1.0.0-pre.32",
         "tslint": "^5.13.1",
-        "typescript": "^3.3.3333"
+        "typescript": "^3.3.3333",
+        "umzug": "^2.2.0"
     },
     "_moduleAliases": {
         "@controllers/*": "controllers/*.js",
