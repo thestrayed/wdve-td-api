@@ -7,7 +7,7 @@
         "db:migrate": "sequelize db:migrate",
         "dev": "yarn db:migrate && ts-node-dev --respawn --transpileOnly server.ts",
         "lint": "tslint --project tsconfig.json",
-        "test": "jest"
+        "test": "jest --verbose --coverage"
     },
     "dependencies": {
         "@hapi/joi": "15.0.0",
@@ -43,15 +43,17 @@
         "typescript": "^3.3.3333"
     },
     "_moduleAliases": {
+        "@controllers/*": "controllers/*.js",
         "@config": "config/config.json",
         "@errors": "errors/index.js",
         "@middlewares": "middlewares/index.js",
         "@models": "model/index.js",
         "@services": "services/index.js",
-        "@typings": "typings/index.js"
+        "@typings/*": "typings/*.js"
     },
     "jest": {
         "collectCoverageFrom": [
+            "controller/*.{js,ts}",
             "erros/*.{js,ts}",
             "lib/*.{js,ts}",
             "services/*.{js,ts}"
@@ -69,12 +71,13 @@
             "node"
         ],
         "moduleNameMapper": {
+            "@controllers/(.*)": "<rootDir>/controllers/$1",
             "@config": "<rootDir>/config/config.json",
             "@errors": "<rootDir>/errors",
             "@middlewares": "<rootDir>/middlewares",
             "@models": "<rootDir>/models",
             "@services": "<rootDir>/services",
-            "@typings": "<rootDir>/typings"
+            "@typings/(.*)": "<rootDir>/typings/$1"
         },
         "testEnvironment": "node",
         "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
