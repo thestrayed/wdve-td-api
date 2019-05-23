@@ -1,5 +1,5 @@
 import { createJoiValidation } from '@middlewares';
-import { Route } from '@typings';
+import { Route } from '@typings/utilities';
 
 export const placeRoutes: Route[]  = [
     {
