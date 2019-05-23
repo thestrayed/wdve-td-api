@@ -5,11 +5,11 @@ import { PlaceService } from '@services';
 
 const placeService = new PlaceService();
 
-export default async (_req: Request, res: Response) => {
+export async function all(_req: Request, res: Response) {
     try {
-        const places = await placeService.all();
+        const places = await placeService.get();
         res.status(HttpStatus.OK).json(places);
     } catch (err) {
         throw err;
     }
-};
+}
