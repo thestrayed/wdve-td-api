@@ -1,18 +1,21 @@
-version: '3'
+version: '2.4'
 services:
   db:
     image: postgres
     container_name: wdve-td-db
     ports:
       - "5432:5432"
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
+      interval: 5s
   app:
     build:
       context: ./server
-      dockerfile: dockerfile.dev
-    image: nodejs
+      target: dev
     container_name: wdve-td-api
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: always
     volumes:
       - ./server:/usr/src/app
