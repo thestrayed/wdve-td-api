@@ -1,4 +1,4 @@
-import { Model, Options } from 'sequelize';
+import { CreateOptions, FindOptions, Model, Options, UpdateOptions } from 'sequelize';
 
 export type Environments = 'development' | 'test' | 'production';
 
@@ -9,3 +9,7 @@ export interface DatabaseModel {
 export type DatabaseConfig = {
     [key in Environments]?: Options;
 };
+
+export interface ModelCreateOptions extends CreateOptions {}
+export interface ModelFindOptions extends FindOptions {}
+export interface ModelUpdateOptions extends UpdateOptions {}
