@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import db from '@models';
-import { ModelCreateOptions, ModelFindOptions, ModelUpdateOptions } from '@typings/db';
-import { IPlaceService, PartialPlace, Place, PlaceModel, PlaceModelStatic } from '@typings/models/place';
 import { DuplicationError, NotFoundError } from '@errors';
+import db from '@models';
+import { BaseCreateOptions, BaseFindOptions, BaseUpdateOptions } from '@typings/base';
+import { IPlaceService, PartialPlace, PlaceModel, PlaceModelStatic } from '@typings/models/place';
 
 class PlaceService implements IPlaceService<PlaceModel, PartialPlace> {
     protected include: Array<object> = [];
@@ -13,27 +13,28 @@ class PlaceService implements IPlaceService<PlaceModel, PartialPlace> {
     /**
      * Create place
      * @param {Place} createObj
-     * @param {CreateOptions} [options]
+     * @param {BaseCreateOptions} [options]
      * @returns {Promise<PlaceModel>}
      */
-    async create(createObj: PartialPlace, options: ModelCreateOptions = {}): Promise<PlaceModel> {
+    async create(createObj: PartialPlace, options: BaseCreateOptions = {}): Promise<PlaceModel> {
         const isExist = await this.where(createObj).limit(1).get();
         if (isExist.length) {
             throw new DuplicationError('Duplicated place');
         }
 
-        const place = await (db.Place as PlaceModelStatic).create(createObj, options);
+        const sequelizeOptions = _.merge({ returning: true }, options);
+        const place = await (db.Place as PlaceModelStatic).create<PlaceModel>(createObj, sequelizeOptions);
         return place;
     }
 
     /**
      * Get place
      * @param {PartialPlace} queryObj
-     * @param {ModelFindOptions} [options]
+     * @param {BaseFindOptions} [options]
      * @returns {Promise<PlaceModel>}
      */
     async get(): Promise<PlaceModel[]> {
-        const options: ModelFindOptions = _.merge({}, {
+        const options: BaseFindOptions = _.merge({}, {
             include: this.include,
             limit: this.number,
             where: this.whereObj,
@@ -55,11 +56,11 @@ class PlaceService implements IPlaceService<PlaceModel, PartialPlace> {
     /**
      * Update place
      * @param {PartialPlace} updateObj
-     * @param {ModelUpdateOptions} options
+     * @param {BaseUpdateOptions} options
      * @returns {Promise<PlaceModel>}
      */
-    async update(updateObj: PartialPlace, options: ModelUpdateOptions = {} as ModelUpdateOptions): Promise<PlaceModel> {
-        const sequelizeOptions: ModelUpdateOptions = _.merge({
+    async update(updateObj: PartialPlace, options: BaseUpdateOptions = {} as BaseUpdateOptions): Promise<PlaceModel> {
+        const sequelizeOptions: BaseUpdateOptions = _.merge({
             returning: true,
             where: this.whereObj,
         }, options);
