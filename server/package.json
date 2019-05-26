@@ -5,9 +5,12 @@
     "license": "MIT",
     "scripts": {
         "db:migrate": "sequelize db:migrate",
-        "dev": "yarn db:migrate && ts-node-dev --respawn --transpileOnly server.ts",
+        "db:seed": "sequelize db:seed:all",
+        "dev": "yarn db:migrate && yarn db:seed && ts-node-dev --respawn --transpileOnly server.ts",
         "lint": "tslint --project tsconfig.json",
-        "test": "jest"
+        "test": "yarn test:unit && yarn test:integration",
+        "test:integration": "jest --verbose --coverage --detectOpenHandles --coverageReporters=text-lcov -c tests/integration/jest.config.integration.js ./integration | coveralls",
+        "test:unit": "jest --verbose --coverage --coverageReporters=text-lcov -c tests/unit/jest.config.unit.js ./unit | coveralls"
     },
     "dependencies": {
         "@hapi/joi": "15.0.0",
@@ -31,55 +34,32 @@
         "@types/jest": "^24.0.11",
         "@types/lodash": "^4.14.123",
         "@types/node": "^11.13.5",
+        "@types/supertest": "^2.0.7",
+        "@types/umzug": "^2.2.1",
         "@types/validator": "^10.11.0",
+        "coveralls": "^3.0.3",
         "faker": "^4.1.0",
         "jest": "^24.7.1",
         "node-mocks-http": "^1.7.3",
         "sequelize-cli": "^5.4.0",
+        "supertest": "^4.0.2",
         "ts-jest": "^24.0.2",
         "ts-node": "^8.0.3",
         "ts-node-dev": "^1.0.0-pre.32",
         "tslint": "^5.13.1",
-        "typescript": "^3.3.3333"
+        "typescript": "^3.3.3333",
+        "umzug": "^2.2.0"
     },
     "_moduleAliases": {
+        "@controllers/*": "controllers/*.js",
         "@config": "config/config.json",
         "@errors": "errors/index.js",
+        "@factory": "tests/factory/index.js",
         "@middlewares": "middlewares/index.js",
         "@models": "model/index.js",
+        "@routes": "routes/index.js",
         "@services": "services/index.js",
-        "@typings": "typings/index.js"
-    },
-    "jest": {
-        "collectCoverageFrom": [
-            "erros/*.{js,ts}",
-            "lib/*.{js,ts}",
-            "services/*.{js,ts}"
-        ],
-        "coveragePathIgnorePatterns": [
-            "/node_modules/",
-            "/tests/"
-        ],
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js",
-            "jsx",
-            "json",
-            "node"
-        ],
-        "moduleNameMapper": {
-            "@config": "<rootDir>/config/config.json",
-            "@errors": "<rootDir>/errors",
-            "@middlewares": "<rootDir>/middlewares",
-            "@models": "<rootDir>/models",
-            "@services": "<rootDir>/services",
-            "@typings": "<rootDir>/typings"
-        },
-        "testEnvironment": "node",
-        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-        "transform": {
-            "^.+\\.tsx?$": "ts-jest"
-        }
+        "@tests/utilities/*": "tests/utilities/*.js",
+        "@typings/*": "typings/*.js"
     }
 }

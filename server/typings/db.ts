@@ -1,9 +1,9 @@
-import { Model, Options } from 'sequelize';
+import Sequelize, { Model, Options } from 'sequelize';
 
 export type Environments = 'development' | 'test' | 'production';
 
 export interface DatabaseModel {
-    [key: string]: typeof Model;
+    [key: string]: typeof Model | typeof Sequelize | Sequelize.Sequelize;
 }
 
 export type DatabaseConfig = {

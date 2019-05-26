@@ -6,10 +6,10 @@ const Place = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
             type: dataTypes.STRING
         },
         latitude: {
-            type: dataTypes.STRING,
+            type: dataTypes.DOUBLE,
         },
-        longtitude: {
-            type: dataTypes.STRING,
+        longitude: {
+            type: dataTypes.DOUBLE,
         },
         createdAt: {
             allowNull: false,

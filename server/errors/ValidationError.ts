@@ -1,15 +1,7 @@
 import HttpStatus from 'http-status';
 
-import { Meta } from '@typings';
+import BaseError from './BaseError';
 
-class ValidationError extends Error {
-    constructor(
-        public message: string,
-        public meta: Meta,
-        public statusCode: number = HttpStatus.BAD_REQUEST,
-    ) {
-        super(message);
-    }
+export class ValidationError extends BaseError {
+    protected statusCode: number = HttpStatus.UNPROCESSABLE_ENTITY;
 }
-
-export default ValidationError;

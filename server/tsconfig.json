@@ -13,14 +13,18 @@
                 "node_modules/*"
             ],
             "@config": ["config/config.json"],
+            "@controllers/*": ["controllers/*"],
             "@errors": ["errors/index.ts"],
+            "@factory": ["tests/factory"],
             "@middlewares": ["middlewares/index.ts"],
             "@models": ["models/index.ts"],
+            "@routes": ["routes/index.ts"],
             "@services": ["services/index.ts"],
-            "@typings": ["typings/index.ts"]
+            "@tests/utilities/*": ["tests/utilities/*"],
+            "@typings/*": ["typings/*"]
         },
         "resolveJsonModule": true,
         "sourceMap": true,
-        "target": "es6",
+        "target": "es2017",
     },
 }

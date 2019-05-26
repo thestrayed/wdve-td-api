@@ -3,8 +3,10 @@ jobs:
   build:
     docker:
       - image: circleci/node
+      - image: postgres:alpine
+        environment:
+          POSTGRES_DB: postgres-test
     working_directory: ~/repo/server
-
     steps:
       - checkout:
           path: ~/repo
@@ -23,5 +25,14 @@ jobs:
           name: Lint
           command: yarn lint
       - run:
-          name: Test
-          command: yarn test
+          name: Unit test
+          command: yarn test:unit
+      - run:
+          name: Integration test
+          command: yarn test:integration
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+        

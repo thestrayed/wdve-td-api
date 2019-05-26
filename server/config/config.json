@@ -8,11 +8,10 @@
         "seederStorage": "sequelize"
     },
     "test": {
-        "host": "wdve-td-db",
-        "database": "postgres",
+        "database": "postgres-test",
         "username": "postgres",
         "password": null,
         "dialect": "postgres",
-        "seederStorage": "sequelize"
+        "logging": false
     }
 }

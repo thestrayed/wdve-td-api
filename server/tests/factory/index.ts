@@ -1,20 +1,47 @@
 import _ from 'lodash';
 
-import { BuildOptions } from 'sequelize';
+import { BaseBuildOptions, BaseModelStatic, Optionalize, BaseModel, BaseCreateOptions } from '@typings/base';
 
-import { BaseModelStatic, BaseModel } from '@typings';
+class ModelFactory {
+    protected size: number;
 
-export default async (
-    model: BaseModelStatic<any>,
-    props: any = {},
-    options: BuildOptions = {},
-    i: number = 1,
-): Promise<BaseModel<any>[]> => {
-    const modelProp = await import(`./models/${model.tableName}`);
+    constructor(
+        private model: BaseModelStatic<any>,
+        private props: Optionalize<any> = {},
+    ) {}
 
-    const mergedProps = _.map(Array(i), () => modelProp.default(props));
+    /**
+     * Build models without persisting
+     * @param {BuildOptions} [options={}]
+     */
+    async build<T>(options: BaseBuildOptions = {} as BaseBuildOptions): Promise<BaseModel<T>[]> {
+        const modelProp = await import(`./models/${this.model.tableName}`);
+        const mergedProps = _.map(Array(this.size), () => modelProp.default(this.props));
 
-    const models = model.build(mergedProps, options);
+        const models = this.model.build(mergedProps, options);
+        return models;
+    }
 
-    return models;
-};
+    /**
+     * Create models
+     * @param {BaseCreateOptions} [options={}]
+     */
+    async create(options: BaseCreateOptions = {} as BaseCreateOptions): Promise<BaseModel<any>[]> {
+        const modelProp = await import(`./models/${this.model.tableName}`);
+        const mergedProps = _.map(Array(this.size), () => modelProp.default(this.props));
+
+        const models = await this.model.bulkCreate(mergedProps, options);
+        return models;
+    }
+
+    /**
+     * Define size of model factory
+     * @param {Number} [number=1]
+     */
+    no(number: number = 1): this {
+        this.size = number;
+        return this;
+    }
+}
+
+export default ModelFactory;

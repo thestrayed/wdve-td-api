@@ -1,8 +1,2 @@
-import { createJoiValidation } from './joi-validation';
-
-export {
-    createJoiValidation,
-};
-// "@models": "<rootDir>/models",
-            // "@services": "<rootDir>/services",
-            // "@typings": "<rootDir>/typings"
+export * from './error-handler';
+export * from './joi-validation';
