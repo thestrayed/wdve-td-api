@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: circleci/node
+      - image: postgres:alpine
+        environment:
+          POSTGRES_DB: postgres-test
     working_directory: ~/repo/server
     steps:
       - checkout:
@@ -18,26 +21,18 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-  unit_test:
-    docker:
-      - image: circleci/node
-    working_directory: ~/repo/server
-    steps:
-      - checkout:
-          path: ~/repo
       - run:
           name: Lint
           command: yarn lint
       - run:
-          name: Test
+          name: Unit test
           command: yarn test:unit
-
+      - run:
+          name: Integration test
+          command: yarn test:integration
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
-      - unit_test:
-          requires:
-            - build
         
