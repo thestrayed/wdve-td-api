@@ -1,15 +1,10 @@
-import { createJoiValidation } from '@middlewares';
+import { all } from '@controllers/place';
 import { Route } from '@typings/utilities';
 
 export const placeRoutes: Route[]  = [
     {
         path: '/api/places',
         method: 'GET',
-        middleware: [
-            createJoiValidation({}),
-        ],
-        handler: (_req, res) => {
-            res.status(200).json({});
-        }
+        handler: all,
     }
 ];
