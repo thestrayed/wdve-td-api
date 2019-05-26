@@ -30,6 +30,13 @@ jobs:
       - run:
           name: Integration test
           command: yarn test:integration
+      - run:
+          name: Push coverage to coveralls
+          command: yarn coveralls
+      - store_test_results:
+          path: ./coverage
+      - store_artifacts:
+          path: ./coverage
 workflows:
   version: 2
   build_and_test:
