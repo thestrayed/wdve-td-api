@@ -9,9 +9,8 @@
         "dev": "yarn db:migrate && yarn db:seed && ts-node-dev --respawn --transpileOnly server.ts",
         "lint": "tslint --project tsconfig.json",
         "test": "yarn test:unit && yarn test:integration",
-        "test:integration": "jest --verbose --coverage --detectOpenHandles -c tests/integration/jest.config.integration.js ./integration",
-        "test:unit": "jest --verbose --coverage -c tests/unit/jest.config.unit.js ./unit",
-        "coveralls": "cat ./coverage/lcov.info | coveralls"
+        "test:integration": "jest --verbose --coverage --detectOpenHandles -c tests/integration/jest.config.integration.js ./integration | coveralls",
+        "test:unit": "jest --verbose --coverage -c tests/unit/jest.config.unit.js ./unit | coveralls"
     },
     "dependencies": {
         "@hapi/joi": "15.0.0",
