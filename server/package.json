@@ -10,7 +10,8 @@
         "lint": "tslint --project tsconfig.json",
         "test": "yarn test:unit && yarn test:integration",
         "test:integration": "jest --verbose --coverage --detectOpenHandles -c tests/integration/jest.config.integration.js ./integration",
-        "test:unit": "jest --verbose --coverage -c tests/unit/jest.config.unit.js ./unit"
+        "test:unit": "jest --verbose --coverage -c tests/unit/jest.config.unit.js ./unit",
+        "coveralls": "cat ./coverage/lcov.info | coveralls"
     },
     "dependencies": {
         "@hapi/joi": "15.0.0",
@@ -37,6 +38,7 @@
         "@types/supertest": "^2.0.7",
         "@types/umzug": "^2.2.1",
         "@types/validator": "^10.11.0",
+        "coveralls": "^3.0.3",
         "faker": "^4.1.0",
         "jest": "^24.7.1",
         "node-mocks-http": "^1.7.3",
