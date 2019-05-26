@@ -1,8 +1,14 @@
 module.exports = {
     rootDir: '../../',
+    coverageReporters: [
+        'json',
+        'lcov',
+        'text',
+        'clover',
+    ],
     coveragePathIgnorePatterns: [
         '/node_modules/',
-        '/tests/'
+        '/tests/',
     ],
     moduleFileExtensions: [
         'ts',
@@ -10,7 +16,7 @@ module.exports = {
         'js',
         'jsx',
         'json',
-        'node'
+        'node',
     ],
     moduleNameMapper: {
         '@controllers/(.*)': '<rootDir>/controllers/$1',
@@ -22,11 +28,11 @@ module.exports = {
         '@routes': '<rootDir>/routes',
         '@services': '<rootDir>/services',
         '@tests/utilities/(.*)': '<rootDir>/tests/utilities/$1',
-        '@typings/(.*)': '<rootDir>/typings/$1'
+        '@typings/(.*)': '<rootDir>/typings/$1',
     },
     testEnvironment: 'node',
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
     transform: {
-        '^.+\\.tsx?$': 'ts-jest'
+        '^.+\\.tsx?$': 'ts-jest',
     },
 };
