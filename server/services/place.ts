@@ -84,20 +84,3 @@ class PlaceService implements IPlaceService<PlaceModel, PartialPlace> {
 }
 
 export default PlaceService;
-
-// function assignToModel(obj, include) {
-//     return obj.include
-//         ? _.forIn(obj.include, o => assignToModel(o, include))
-//         : _.assign(obj, { include });
-// }
-
-// function run(models, obj = {}) {
-//     const parts = models.split('.');
-//     const model = _.capitalize(parts.shift());
-
-//     assignToModel(obj, _.concat([], { model }));
-
-//     return parts.length
-//         ? run(parts.join('.'), obj)
-//         : obj;
-// }
