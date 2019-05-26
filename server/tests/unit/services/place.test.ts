@@ -1,8 +1,17 @@
+import faker from 'faker';
 import _ from 'lodash';
 
 import db from '@models';
 import { PlaceService } from '@services';
 import { PartialPlace, PlaceModelStatic, PlaceModel } from '@typings/models/place';
+
+jest.mock('@models', () => ({
+    Place: {
+        create: (createObj: PartialPlace) => Promise.resolve(_.merge({ id: faker.random.number(10) }, createObj)),
+        findAll: jest.fn(),
+        update: jest.fn(),
+    },
+}));
 
 describe('services/place', () => {
     let placeService: PlaceService;
@@ -11,9 +20,9 @@ describe('services/place', () => {
 
     const id = 1;
     const placeObj: PartialPlace = {
-        name: 'place',
-        latitude: '100',
-        longitude: '100',
+        name: faker.name.title(),
+        latitude: parseFloat(faker.address.latitude()),
+        longitude: parseFloat(faker.address.longitude()),
     };
 
     beforeAll(() => {
@@ -21,7 +30,7 @@ describe('services/place', () => {
     });
 
     it('should exist', () => {
-        expect(true).toBeTruthy();
+        expect(placeService).toBeTruthy();
     });
 
     it('should throw an error (Duplicated place)', async () => {
