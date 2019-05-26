@@ -5,9 +5,12 @@
     "license": "MIT",
     "scripts": {
         "db:migrate": "sequelize db:migrate",
-        "dev": "yarn db:migrate && ts-node-dev --respawn --transpileOnly server.ts",
+        "db:seed": "sequelize db:seed:all",
+        "dev": "yarn db:migrate && yarn db:seed && ts-node-dev --respawn --transpileOnly server.ts",
         "lint": "tslint --project tsconfig.json",
-        "test": "jest --verbose --coverage"
+        "test": "yarn test:unit && yarn test:integration",
+        "test:integration": "jest --verbose --coverage --detectOpenHandles -c tests/integration/jest.config.integration.js ./integration",
+        "test:unit": "jest --verbose --coverage -c tests/unit/jest.config.unit.js ./unit"
     },
     "dependencies": {
         "@hapi/joi": "15.0.0",
@@ -50,43 +53,12 @@
         "@controllers/*": "controllers/*.js",
         "@config": "config/config.json",
         "@errors": "errors/index.js",
+        "@factory": "tests/factory/index.js",
         "@middlewares": "middlewares/index.js",
         "@models": "model/index.js",
+        "@routes": "routes/index.js",
         "@services": "services/index.js",
+        "@tests/utilities/*": "tests/utilities/*.js",
         "@typings/*": "typings/*.js"
-    },
-    "jest": {
-        "collectCoverageFrom": [
-            "controller/*.{js,ts}",
-            "erros/*.{js,ts}",
-            "lib/*.{js,ts}",
-            "services/*.{js,ts}"
-        ],
-        "coveragePathIgnorePatterns": [
-            "/node_modules/",
-            "/tests/"
-        ],
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js",
-            "jsx",
-            "json",
-            "node"
-        ],
-        "moduleNameMapper": {
-            "@controllers/(.*)": "<rootDir>/controllers/$1",
-            "@config": "<rootDir>/config/config.json",
-            "@errors": "<rootDir>/errors",
-            "@middlewares": "<rootDir>/middlewares",
-            "@models": "<rootDir>/models",
-            "@services": "<rootDir>/services",
-            "@typings/(.*)": "<rootDir>/typings/$1"
-        },
-        "testEnvironment": "node",
-        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-        "transform": {
-            "^.+\\.tsx?$": "ts-jest"
-        }
     }
 }
