@@ -20,7 +20,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
   unit_test:
     docker:
-      - image:circleci/node
+      - image: circleci/node
     working_directory: ~/repo/server
     steps:
       - checkout:
@@ -31,13 +31,6 @@ jobs:
       - run:
           name: Test
           command: yarn test:unit
-  integration_test:
-    machine: true
-    working_directory: ~/repo/server
-    steps:
-      - run:
-          name: List
-          command: ls
 
 workflows:
   version: 2
@@ -47,7 +40,4 @@ workflows:
       - unit_test:
           requires:
             - build
-      - integration_test:
-          requires:
-            - unit_test
         
