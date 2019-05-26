@@ -1,6 +1,9 @@
-import { BuildOptions, Model } from 'sequelize';
+import { BuildOptions, CreateOptions, FindOptions, Model, UpdateOptions } from 'sequelize';
 
-import { ModelCreateOptions, ModelUpdateOptions } from './db';
+export interface BaseBuildOptions extends BuildOptions {}
+export interface BaseCreateOptions extends CreateOptions {}
+export interface BaseFindOptions extends FindOptions {}
+export interface BaseUpdateOptions extends UpdateOptions {}
 
 export interface BaseModel<T> extends Model<T>  {
     createdAt: string;
@@ -20,10 +23,10 @@ export type BaseModelStatic<T> = typeof Model & {
  * @template Optionalize
  */
 export interface IBaseService<BaseModel, Optionalize> {
-    create(createObj: Optionalize, options: ModelCreateOptions): Promise<BaseModel>;
+    create(createObj: Optionalize, options: BaseCreateOptions): Promise<BaseModel>;
     get(): Promise<BaseModel[]>;
     limit(number: number): this;
-    update(updateObj: Optionalize, options: ModelUpdateOptions): Promise<BaseModel>;
+    update(updateObj: Optionalize, options: BaseUpdateOptions): Promise<BaseModel>;
     where(whereObj: Optionalize): this;
 }
 

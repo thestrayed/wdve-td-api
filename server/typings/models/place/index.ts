@@ -4,8 +4,8 @@ export type PartialPlace = Optionalize<Place>;
 
 export interface Place extends BaseModelAttributes {
     name: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
 }
 
 export interface PlaceModel extends BaseModel<PlaceModel>, Place, SoftDeleteBaseModel {}
