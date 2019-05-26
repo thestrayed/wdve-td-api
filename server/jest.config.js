@@ -1,11 +1,5 @@
 module.exports = {
     rootDir: '../../',
-    coverageReporters: [
-        'json',
-        'lcov',
-        'text',
-        'clover',
-    ],
     coveragePathIgnorePatterns: [
         '/node_modules/',
         '/tests/',
