@@ -8,12 +8,15 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             name: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             latitude: {
+                allowNull: false,
                 type: Sequelize.DOUBLE
             },
             longitude: {
+                allowNull: false,
                 type: Sequelize.DOUBLE
             },
             createdAt: {

@@ -26,10 +26,10 @@ jobs:
           command: yarn lint
       - run:
           name: Unit test
-          command: yarn test:unit
+          command: yarn ci:test:unit
       - run:
           name: Integration test
-          command: yarn test:integration
+          command: yarn ci:test:integration
 workflows:
   version: 2
   build_and_test:

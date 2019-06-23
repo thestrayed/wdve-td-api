@@ -1,5 +1,6 @@
 wdve-td:
   port: 3000
+  limit: 5mb
   database:
     dialect: postgres
     host: 127.0.0.1

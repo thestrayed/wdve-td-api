@@ -43,6 +43,7 @@ export async function down() {
  * Omit fields from object
  * @param {Object} obj
  */
-export function omitDateTimeFromModel(obj: object): object {
-    return _.omit(obj, OMITTED_FIELDS);
+export function omitDateTimeFromModel(obj: object, additional: string[] = []): object {
+    const mergedOmittedFields = _.concat(OMITTED_FIELDS, additional);
+    return _.omit(obj, mergedOmittedFields);
 }

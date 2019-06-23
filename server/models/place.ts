@@ -3,12 +3,15 @@ import { DataTypes, Sequelize } from 'sequelize';
 const Place = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     return sequelize.define('Place', {
         name: {
+            allowNull: false,
             type: dataTypes.STRING
         },
         latitude: {
+            allowNull: false,
             type: dataTypes.DOUBLE,
         },
         longitude: {
+            allowNull: false,
             type: dataTypes.DOUBLE,
         },
         createdAt: {

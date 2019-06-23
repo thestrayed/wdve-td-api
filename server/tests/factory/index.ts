@@ -14,7 +14,7 @@ class ModelFactory {
      * Build models without persisting
      * @param {BuildOptions} [options={}]
      */
-    async build<T>(options: BaseBuildOptions = {} as BaseBuildOptions): Promise<BaseModel<T>[]> {
+    async build(options: BaseBuildOptions = {} as BaseBuildOptions): Promise<BaseModel<any>[]> {
         const modelProp = await import(`./models/${this.model.tableName}`);
         const mergedProps = _.map(Array(this.size), () => modelProp.default(this.props));
 
@@ -32,6 +32,13 @@ class ModelFactory {
 
         const models = await this.model.bulkCreate(mergedProps, options);
         return models;
+    }
+
+    /**
+     * Destroy models
+     */
+    async destroy()  {
+        await this.model.destroy({ truncate: true });
     }
 
     /**

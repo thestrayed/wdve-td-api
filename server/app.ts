@@ -8,6 +8,8 @@ const app = express();
 
 app.set('port', config.get('wdve-td.port'));
 
+app.use(express.json({ limit: config.get('wdve-td.limit') }));
+
 app.use(router);
 
 app.use(errorHandler);
