@@ -20,7 +20,7 @@ export type BaseModelStatic<T> = typeof Model & {
 
 export interface IBaseService<BaseModel> {
     create<T>(createObj: Partial<T>, options?: BaseCreateOptions): Promise<BaseModel>;
-    get<T>(page?: number, pageSize?: number, whereObj?: Partial<T>): Promise<BaseModel[]>;
+    getAll<T>(page?: number, pageSize?: number, whereObj?: Partial<T>): Promise<BaseModel[]>;
     update<T>(updateObj: Partial<T>, whereObj: Partial<T>, options?: BaseUpdateOptions): Promise<BaseModel>;
 }
 
