@@ -26,7 +26,7 @@ export const getAllPlacesIntegrationTest = () => {
         const result = await request(app)
             .get(URL);
 
-        expect(result.body).toEqual([]);
+        expect(result.body.data).toEqual([]);
         expect(result.status).toEqual(HttpStatus.OK);
     });
 
@@ -35,6 +35,6 @@ export const getAllPlacesIntegrationTest = () => {
         const result = await request(app)
             .get(URL);
 
-        expect(result.body).toHaveLength(3);
+        expect(result.body.data).toHaveLength(3);
     });
 };

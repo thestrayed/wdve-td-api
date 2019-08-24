@@ -48,7 +48,7 @@ export const createPlaceIntegrationTest = () => {
             .send(createObj);
 
         expect(
-            omitDateTimeFromModel(result.body.data.place, ['id'])
+            omitDateTimeFromModel(result.body.data, ['id'])
         ).toEqual(createObj);
     });
 

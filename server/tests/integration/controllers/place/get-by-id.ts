@@ -26,7 +26,7 @@ export const getByIdPlaceIntegrationTest = () => {
         const result = await request(app)
             .get(URL);
 
-        expect(result.body).toEqual(undefined);
+        expect(result.body).toEqual({});
         expect(result.status).toEqual(HttpStatus.NOT_FOUND);
     });
 
@@ -35,6 +35,8 @@ export const getByIdPlaceIntegrationTest = () => {
         const result = await request(app)
             .get(URL);
 
-        expect(result.body).toHaveLength(1);
+        expect(
+            result.body.data
+        ).toBeTruthy;
     });
 };
