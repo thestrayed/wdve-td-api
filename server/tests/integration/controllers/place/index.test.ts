@@ -1,7 +1,8 @@
 import { up, down } from '@tests/utilities/db';
 
-import { allPlacesIntegrationTest } from './all';
 import { createPlaceIntegrationTest } from './create';
+import { getAllPlacesIntegrationTest } from './get-all';
+import { getByIdPlaceIntegrationTest } from './get-by-id';
 
 beforeAll(async () => {
     await up();
@@ -11,5 +12,6 @@ afterAll(async () => {
     await down();
 });
 
-describe('GET /places', allPlacesIntegrationTest);
 describe('POST /places', createPlaceIntegrationTest);
+describe('GET /places', getAllPlacesIntegrationTest);
+describe('GET /places/:id', getByIdPlaceIntegrationTest);
