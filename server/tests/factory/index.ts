@@ -1,13 +1,13 @@
 import _ from 'lodash';
 
-import { BaseBuildOptions, BaseModelStatic, Optionalize, BaseModel, BaseCreateOptions } from '@typings/base';
+import { BaseBuildOptions, BaseModelStatic, BaseModel, BaseCreateOptions } from '@typings/base';
 
 class ModelFactory {
     protected size: number;
 
     constructor(
         private model: BaseModelStatic<any>,
-        private props: Optionalize<any> = {},
+        private props: Partial<any> = {},
     ) {}
 
     /**
