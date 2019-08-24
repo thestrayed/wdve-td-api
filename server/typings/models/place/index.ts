@@ -1,6 +1,6 @@
-import { BaseModel, BaseModelAttributes, BaseModelStatic, IBaseService, Optionalize, SoftDeleteBaseModel } from '../../base';
+import { BaseModel, BaseModelAttributes, BaseModelStatic, IBaseService, SoftDeleteBaseModel } from '../../base';
 
-export type PartialPlace = Optionalize<Place>;
+export type PartialPlace = Partial<Place>;
 
 export interface Place extends BaseModelAttributes {
     name: string;
@@ -12,4 +12,4 @@ export interface PlaceModel extends BaseModel<PlaceModel>, Place, SoftDeleteBase
 
 export type PlaceModelStatic = BaseModelStatic<PlaceModel>;
 
-export interface IPlaceService<PlaceModel, PartialPlace> extends IBaseService<PlaceModel, PartialPlace> {}
+export interface IPlaceService<PlaceModel, PartialPlace> extends IBaseService<PlaceModel> {}

@@ -18,21 +18,11 @@ export type BaseModelStatic<T> = typeof Model & {
     new(values?: object, options?: BuildOptions): T;
 };
 
-/**
- * @template BaseModel
- * @template Optionalize
- */
-export interface IBaseService<BaseModel, Optionalize> {
-    create(createObj: Optionalize, options: BaseCreateOptions): Promise<BaseModel>;
-    get(): Promise<BaseModel[]>;
-    limit(number: number): this;
-    update(updateObj: Optionalize, options: BaseUpdateOptions): Promise<BaseModel>;
-    where(whereObj: Optionalize): this;
+export interface IBaseService<BaseModel> {
+    create<T>(createObj: Partial<T>, options: BaseCreateOptions): Promise<BaseModel>;
+    get(page: number, pageSize: number): Promise<BaseModel[]>;
+    update<T>(updateObj: Partial<T>, whereObj: Partial<T>, options: BaseUpdateOptions): Promise<BaseModel>;
 }
-
-export type Optionalize<T> = {
-    [K in keyof T]?: T[K];
-};
 
 export interface SoftDeleteBaseModel {
     deletedAt: string;
