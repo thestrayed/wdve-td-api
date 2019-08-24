@@ -1,5 +1,3 @@
 import PlaceService from './place';
 
-export {
-    PlaceService,
-};
+export { PlaceService };
