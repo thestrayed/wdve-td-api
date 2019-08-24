@@ -1,6 +1,6 @@
 # WDVE.TD
 
-[![CircleCI](https://circleci.com/gh/thestrayed/wdve-td-api.svg?style=svg)](https://circleci.com/gh/thestrayed/wdve-td-api) [![Coverage Status](https://coveralls.io/repos/github/thestrayed/wdve-td-api/badge.svg?branch=dev)](https://coveralls.io/github/thestrayed/wdve-td-api?branch=dev)
+[![CircleCI](https://circleci.com/gh/thestrayed/wdve-td-api.svg?style=svg)](https://circleci.com/gh/thestrayed/wdve-td-api) [![Coverage Status](https://coveralls.io/repos/github/thestrayed/wdve-td-api/badge.svg?branch=master)](https://coveralls.io/github/thestrayed/wdve-td-api?branch=master)
 
 ## What did we eat today
 
