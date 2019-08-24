@@ -1,38 +1,106 @@
+# version: 2
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/node:12.6.0
+#       - image: postgres:alpine
+#         environment:
+#           POSTGRES_DB: postgres-test
+#     working_directory: ~/repo/server
+#     steps:
+#       - checkout:
+#           path: ~/repo
+#       - restore_cache:
+#           keys:
+#             - v1-dependencies-{{ checksum "package.json" }}
+#             - v1-dependencies-
+#       - run:
+#           name: Install
+#           command: yarn install
+#       - save_cache:
+#           paths:
+#             - node_modules
+#           key: v1-dependencies-{{ checksum "package.json" }}
+#       - run:
+#           name: Lint
+#           command: yarn lint
+#       - run:
+#           name: Unit test
+#           command: yarn ci:test:unit
+#       - run:
+#           name: Integration test
+#           command: yarn ci:test:integration
+# workflows:
+#   version: 2
+#   build_and_test:
+#     jobs:
+#       - build
 version: 2
-jobs:
-  build:
+references:
+  default_workspace: &default_workspace
+    docker:
+      - image: circleci/node:12.6.0
+    working_directory: ~/repo/server
+  integration_workspace: &integration_workspace
     docker:
       - image: circleci/node:12.6.0
       - image: postgres:alpine
         environment:
           POSTGRES_DB: postgres-test
     working_directory: ~/repo/server
+  yarn_restore_cache: &yarn_restore_cache
+    restore_cache:
+      keys:
+        - node-modules-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        - node-modules-v1-{{ .Branch }}-
+        - node-modules-v1-
+  yarn: &yarn
+    run: yarn --frozen-lockfile
+  yarn_save_cache: &yarn_save_cache
+    save_cache:
+      key: node-modules-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      paths:
+        - node_modules
+jobs:
+  run_linters:
+    <<: *default_workspace
     steps:
       - checkout:
           path: ~/repo
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run:
-          name: Install
-          command: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: Lint
-          command: yarn lint
-      - run:
-          name: Unit test
-          command: yarn ci:test:unit
-      - run:
-          name: Integration test
-          command: yarn ci:test:integration
+      - *yarn_restore_cache
+      - *yarn
+      - *yarn_save_cache
+      - run: yarn ci:lint
+  run_unit_tests:
+    <<: *default_workspace
+    steps:
+      - checkout:
+          path: ~/repo
+      - *yarn_restore_cache
+      - *yarn
+      - *yarn_save_cache
+      - run: yarn ci:test:unit
+      - store_test_results:
+          path: ./.reports
+      - store_artifacts:
+          path: ./.reports
+  run_integration_tests:
+    <<: *integration_workspace
+    steps:
+      - checkout:
+          path: ~/repo
+      - *yarn_restore_cache
+      - *yarn
+      - *yarn_save_cache
+      - run: yarn ci:test:integration
+      - store_test_results:
+          path: ./.reports
+      - store_artifacts:
+          path: ./.reports
 workflows:
   version: 2
-  build_and_test:
+  linters_and_tests:
     jobs:
-      - build
-
+      - run_linters
+      - run_unit_tests
+      - run_integration_tests
