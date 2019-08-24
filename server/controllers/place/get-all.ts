@@ -7,7 +7,7 @@ import { PlaceService } from '@services';
 const placeService = new PlaceService();
 
 export async function getAll(req: Request, res: Response): Promise<Response> {
-    const places = await placeService.get(req.query.page, req.query.pageSize);
+    const places = await placeService.getAll(req.query.page, req.query.pageSize);
 
     return res.status(HttpStatus.OK).json({ data: places });
 }
