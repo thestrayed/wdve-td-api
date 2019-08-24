@@ -1,4 +1,5 @@
 wdve-td:
+  port: PORT
   database:
     dialect: DB_DIALECT
     name: DB_NAME
