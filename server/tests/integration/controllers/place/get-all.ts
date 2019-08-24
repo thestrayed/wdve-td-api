@@ -10,7 +10,7 @@ import { PlaceModelStatic } from '@typings/models/place';
 const LENGTH = 3;
 const URL = '/api/places';
 
-export const allPlacesIntegrationTest = () => {
+export const getAllPlacesIntegrationTest = () => {
     let modelFactory: ModelFactory;
 
     beforeEach(async () => {
