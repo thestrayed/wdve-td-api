@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { DuplicationError, NotFoundError } from '@errors';
 import db from '@models';
 import { BaseCreateOptions, BaseFindOptions, BaseUpdateOptions } from '@typings/base';
@@ -22,8 +20,7 @@ class PlaceService implements IPlaceService<PlaceModel, PartialPlace> {
             throw new DuplicationError('Duplicated place');
         }
 
-        const sequelizeOptions = _.merge({ returning: true }, options);
-        const place = await (db.Place as PlaceModelStatic).create<PlaceModel>(createObj, sequelizeOptions);
+        const place = await (db.Place as PlaceModelStatic).create<PlaceModel>(createObj, options);
         return place;
     }
 
@@ -34,11 +31,12 @@ class PlaceService implements IPlaceService<PlaceModel, PartialPlace> {
      * @returns {Promise<PlaceModel>}
      */
     async get(): Promise<PlaceModel[]> {
-        const options: BaseFindOptions = _.merge({}, {
+        const options: BaseFindOptions = {
             include: this.include,
             limit: this.number,
-            where: this.whereObj,
-        });
+            where: { ...this.whereObj },
+        };
+
         const place = await (db.Place as PlaceModelStatic).findAll(options);
         return place;
     }
@@ -60,10 +58,12 @@ class PlaceService implements IPlaceService<PlaceModel, PartialPlace> {
      * @returns {Promise<PlaceModel>}
      */
     async update(updateObj: PartialPlace, options: BaseUpdateOptions = {} as BaseUpdateOptions): Promise<PlaceModel> {
-        const sequelizeOptions: BaseUpdateOptions = _.merge({
+        const sequelizeOptions = {
+            ...options,
             returning: true,
-            where: this.whereObj,
-        }, options);
+            where: { ...this.whereObj },
+        };
+
         const [count, [place]] = await (db.Place as PlaceModelStatic).update(updateObj, sequelizeOptions);
         if (count === 0) {
             throw new NotFoundError('Place not found');
