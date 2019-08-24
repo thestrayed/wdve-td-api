@@ -9,7 +9,7 @@ const placeService = new PlaceService();
 export async function create(req: Request, res: Response) {
     const place = await placeService.create(req.body);
     res.status(HttpStatus.CREATED).json({
-        data: { place },
+        data: place,
     });
 }
 
