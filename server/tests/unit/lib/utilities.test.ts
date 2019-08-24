@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { all } from '@controllers/place';
+import { getAll } from '@controllers/place';
 
 import { errorHandler } from '@middlewares';
 import { Route } from '@typings/utilities';
@@ -56,7 +56,7 @@ describe('lib/utilities', () => {
             {
                 path: '/api',
                 method: 'GET',
-                handler: all,
+                handler: getAll,
             }
         ];
         setRoutes(router, routes);

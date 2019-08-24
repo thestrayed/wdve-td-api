@@ -9,6 +9,8 @@ jest.mock('@models', () => ({
     Place: {
         create: (createObj: PartialPlace) => Promise.resolve(_.merge({ id: faker.random.number(10) }, createObj)),
         findAll: jest.fn(),
+        findByPk: jest.fn(),
+        findOne: jest.fn(),
         update: jest.fn(),
     },
 }));
@@ -36,7 +38,7 @@ describe('services/place', () => {
     it('should throw an error (Duplicated place)', async () => {
         const result = _.merge({}, { id }, placeObj) as PlaceModel;
         (db.Place as jest.Mocked<PlaceModelStatic>)
-            .findAll.mockResolvedValue([result]);
+            .findOne.mockResolvedValue(result);
 
         try {
             await placeService.create(placeObj);
@@ -47,7 +49,7 @@ describe('services/place', () => {
 
     it('should create place', async () => {
         (db.Place as jest.Mocked<PlaceModelStatic>)
-            .findAll.mockResolvedValue([]);
+            .findOne.mockResolvedValue(undefined);
 
         const place = await placeService.create(placeObj);
         expect(_.omit(place, 'id')).toEqual(placeObj);
@@ -57,7 +59,7 @@ describe('services/place', () => {
         (db.Place as jest.Mocked<PlaceModelStatic>)
             .findAll.mockResolvedValue([]);
 
-        const places = await placeService.get();
+        const places = await placeService.getAll();
         expect([]).toEqual(places);
     });
 
@@ -66,7 +68,7 @@ describe('services/place', () => {
         (db.Place as jest.Mocked<PlaceModelStatic>)
             .findAll.mockResolvedValue(result);
 
-        const places = await placeService.limit().where({ id }).get();
+        const places = await placeService.getAll(1, 10, { id });
         expect(result).toEqual(places);
         expect(result).toHaveLength(DEFAULT_LIMIT);
     });
@@ -74,9 +76,9 @@ describe('services/place', () => {
     it('should return place with limit of 1', async () => {
         const result = _.merge({}, { id }, placeObj) as PlaceModel;
         (db.Place as jest.Mocked<PlaceModelStatic>)
-            .findAll.mockResolvedValue([result]);
+            .findByPk.mockResolvedValue(result);
 
-        const [place] = await placeService.limit(1).where({ name: placeObj.name }).get();
+        const place = await placeService.getById(id);
         expect(result).toEqual(place);
     });
 
@@ -86,7 +88,7 @@ describe('services/place', () => {
             .update.mockResolvedValue([0, [result]]);
 
         try {
-            await placeService.where({ id }).update(placeObj);
+            await placeService.update(placeObj, { id });
         } catch (err) {
             expect(err.message).toEqual('Place not found');
         }
@@ -97,7 +99,7 @@ describe('services/place', () => {
         (db.Place as jest.Mocked<PlaceModelStatic>)
             .update.mockResolvedValue([1, [result]]);
 
-        const place = await placeService.update(placeObj);
+        const place = await placeService.update(placeObj, { id });
         expect(result).toEqual(place);
     });
 });
