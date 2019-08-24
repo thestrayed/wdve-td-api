@@ -9,6 +9,9 @@ const placeService = new PlaceService();
 export async function getById(req: Request, res: Response): Promise<Response> {
     const placeId = parseInt(req.params.id, 10);
     const place = await placeService.getById(placeId);
+    if (!place) {
+        return res.status(HttpStatus.NOT_FOUND).send();
+    }
 
     return res.status(HttpStatus.OK).json({ data: place });
 }
