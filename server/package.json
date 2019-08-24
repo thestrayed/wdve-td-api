@@ -3,7 +3,11 @@
     "version": "1.0.0",
     "main": "dist/server.js",
     "license": "MIT",
+    "engines": {
+        "node": "12.6.0"
+      },
     "scripts": {
+        "db:init": "yarn db:migrate && yarn db:seed",
         "db:migrate": "sequelize db:migrate",
         "db:seed": "sequelize db:seed:all",
         "dev": "yarn db:migrate && yarn db:seed && ts-node-dev --respawn --transpileOnly server.ts",
