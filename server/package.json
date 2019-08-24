@@ -64,15 +64,15 @@
         "umzug": "2.2.0"
     },
     "_moduleAliases": {
-        "@controllers/*": "controllers/*.js",
+        "@controllers": "controllers",
         "@config": "config/config.json",
-        "@errors": "errors/index.js",
-        "@factory": "tests/factory/index.js",
-        "@middlewares": "middlewares/index.js",
-        "@models": "model/index.js",
-        "@routes": "routes/index.js",
-        "@services": "services/index.js",
-        "@tests/utilities/*": "tests/utilities/*.js",
-        "@typings/*": "typings/*.js"
+        "@errors": "errors",
+        "@factory": "tests/factory",
+        "@middlewares": "middlewares",
+        "@models": "models",
+        "@routes": "routes",
+        "@services": "services",
+        "@tests/utilities": "tests/utilities",
+        "@typings": "typings"
     }
 }
