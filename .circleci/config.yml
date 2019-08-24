@@ -70,7 +70,7 @@ jobs:
       - *yarn_restore_cache
       - *yarn
       - *yarn_save_cache
-      - run: yarn ci:lint
+      - run: yarn lint
   run_unit_tests:
     <<: *default_workspace
     steps:
