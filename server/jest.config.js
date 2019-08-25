@@ -13,8 +13,9 @@ module.exports = {
         'node',
     ],
     moduleNameMapper: {
-        '@controllers/(.*)': '<rootDir>/controllers/$1',
         '@config': '<rootDir>/config/config.json',
+        '@constants/(.*)': '<rootDir>/constants/$1',
+        '@controllers/(.*)': '<rootDir>/controllers/$1',
         '@errors': '<rootDir>/errors',
         '@factory': '<rootDir>/tests/factory',
         '@middlewares': '<rootDir>/middlewares',
