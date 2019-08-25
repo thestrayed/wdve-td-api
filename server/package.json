@@ -13,11 +13,11 @@
         "dev": "ts-node-dev --respawn --transpileOnly server.ts",
         "lint": "tslint --project tsconfig.json",
         "test": "yarn test:unit && yarn test:integration",
-        "test:integration": "jest --verbose --coverage --detectOpenHandles -c tests/integration/jest.config.integration.js ./integration",
-        "test:unit": "jest --verbose --coverage -c tests/unit/jest.config.unit.js ./unit",
+        "test:integration": "jest --verbose --coverage --detectOpenHandles ./integration",
+        "test:unit": "jest --verbose --coverage ./unit",
         "ci:test": "yarn ci:test:integration && yarn ci:test:unit",
-        "ci:test:integration": "jest --verbose --coverage --detectOpenHandles --coverageReporters=text-lcov -c tests/integration/jest.config.integration.js ./integration | coveralls",
-        "ci:test:unit": "jest --verbose --coverage --coverageReporters=text-lcov -c tests/unit/jest.config.unit.js ./unit | coveralls"
+        "ci:test:integration": "jest --verbose --coverage --detectOpenHandles --coverageReporters=text-lcov ./integration | coveralls",
+        "ci:test:unit": "jest --verbose --coverage --coverageReporters=text-lcov ./unit | coveralls"
     },
     "husky": {
         "hooks": {
