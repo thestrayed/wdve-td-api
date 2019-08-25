@@ -2,23 +2,23 @@ import _ from 'lodash';
 
 import { BaseBuildOptions, BaseModelStatic, BaseModel, BaseCreateOptions } from '@typings/base';
 
-class ModelFactory {
+class ModelFactory<T, V> {
     protected size: number;
 
     constructor(
-        private model: BaseModelStatic<any>,
-        private props: Partial<any> = {},
+        private model: BaseModelStatic<T>,
+        private props: Partial<V> = {},
     ) {}
 
     /**
      * Build models without persisting
      * @param {BuildOptions} [options={}]
      */
-    async build(options: BaseBuildOptions = {} as BaseBuildOptions): Promise<BaseModel<any>[]> {
+    async build(options: BaseBuildOptions = {} as BaseBuildOptions): Promise<BaseModel<T>[]> {
         const modelProp = await import(`./models/${this.model.tableName}`);
-        const mergedProps = _.map(Array(this.size), () => modelProp.default(this.props));
+        const mergedProps: Partial<V>[] = _.map(Array(this.size), () => modelProp.default(this.props));
 
-        const models = this.model.build(mergedProps, options);
+        const models: BaseModel<T>[] = this.model.bulkBuild(mergedProps, options);
         return models;
     }
 
@@ -26,11 +26,11 @@ class ModelFactory {
      * Create models
      * @param {BaseCreateOptions} [options={}]
      */
-    async create(options: BaseCreateOptions = {} as BaseCreateOptions): Promise<BaseModel<any>[]> {
+    async create(options: BaseCreateOptions = {} as BaseCreateOptions): Promise<BaseModel<T>[]> {
         const modelProp = await import(`./models/${this.model.tableName}`);
-        const mergedProps = _.map(Array(this.size), () => modelProp.default(this.props));
+        const mergedProps: Partial<V>[] = _.map(Array(this.size), () => modelProp.default(this.props));
 
-        const models = await this.model.bulkCreate(mergedProps, options);
+        const models: BaseModel<T>[] = await this.model.bulkCreate(mergedProps, options);
         return models;
     }
 
