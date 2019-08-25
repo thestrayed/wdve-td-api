@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import { ValidationError } from '@errors';
 import { Meta } from '@typings/errors';
+import { MiddlewareFunction } from '@typings/utilities';
 
 const expectedRequestFieldNames: string[] = [
     'body',
@@ -21,7 +22,7 @@ function formatJoiErrorDetail(err: ValidationErrorItem): string {
     return message;
 }
 
-export function createJoiValidation(schema: object, options: ValidationOptions = { abortEarly: false, allowUnknown: true }) {
+export function createJoiValidation(schema: object, options: ValidationOptions = { abortEarly: false, allowUnknown: true }): MiddlewareFunction {
     const fieldNameToBeValidated = Object.keys(schema)
         .filter(schemaFieldName => _.includes(expectedRequestFieldNames, schemaFieldName));
     const compiledSchema = Joi.compile(schema);
