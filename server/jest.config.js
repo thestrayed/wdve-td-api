@@ -1,5 +1,5 @@
 module.exports = {
-    rootDir: '../../',
+    rootDir: '.',
     coveragePathIgnorePatterns: [
         '/node_modules/',
         '/tests/',
