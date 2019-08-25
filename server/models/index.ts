@@ -7,7 +7,7 @@ import { DatabaseModel, DatabaseConfig, Environments } from '@typings/db';
 
 const db = {} as DatabaseModel;
 
-const env = (process.env.NODE_ENV || 'development') as Environments;
+const env = process.env.NODE_ENV as Environments;
 const databaseConfig = (config as DatabaseConfig)[env];
 
 const sequelize = new Sequelize.Sequelize(databaseConfig);
