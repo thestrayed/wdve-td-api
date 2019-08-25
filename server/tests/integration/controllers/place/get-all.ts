@@ -5,13 +5,13 @@ import app from '../../../../app';
 
 import ModelFactory from '@factory';
 import db from '@models';
-import { PlaceModelStatic } from '@typings/models/place';
+import { Place, PlaceModel, PlaceModelStatic } from '@typings/models/place';
 
 const LENGTH = 3;
 const URL = '/api/places';
 
 export const getAllPlacesIntegrationTest = () => {
-    let modelFactory: ModelFactory;
+    let modelFactory: ModelFactory<PlaceModel, Place>;
 
     beforeEach(async () => {
         modelFactory = new ModelFactory(db.Place as PlaceModelStatic);

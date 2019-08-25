@@ -5,13 +5,13 @@ import app from '../../../../app';
 
 import ModelFactory from '@factory';
 import db from '@models';
-import { PlaceModelStatic } from '@typings/models/place';
+import { Place, PlaceModel, PlaceModelStatic } from '@typings/models/place';
 
 const LENGTH = 1;
 const URL = '/api/places/1';
 
 export const getByIdPlaceIntegrationTest = () => {
-    let modelFactory: ModelFactory;
+    let modelFactory: ModelFactory<PlaceModel, Place>;
 
     beforeEach(async () => {
         modelFactory = new ModelFactory(db.Place as PlaceModelStatic);
@@ -26,7 +26,7 @@ export const getByIdPlaceIntegrationTest = () => {
         const result = await request(app)
             .get(URL);
 
-        expect(result.body).toEqual({});
+        expect(result.body.message).toEqual('Place not found');
         expect(result.status).toEqual(HttpStatus.NOT_FOUND);
     });
 

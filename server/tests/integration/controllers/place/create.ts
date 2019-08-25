@@ -9,13 +9,18 @@ import ModelFactory from '@factory';
 import db from '@models';
 import { omitDateTimeFromModel } from '@tests/utilities/db';
 import { ErrorText } from '@typings/errors';
-import { PartialPlace, PlaceModelStatic } from '@typings/models/place';
+import {
+    PartialPlace,
+    Place,
+    PlaceModel,
+    PlaceModelStatic,
+} from '@typings/models/place';
 
 const LENGTH = 1;
 const URL = '/api/places';
 
 export const createPlaceIntegrationTest = () => {
-    let modelFactory: ModelFactory;
+    let modelFactory: ModelFactory<PlaceModel, Place>;
     const createObj: PartialPlace = {
         name: faker.name.title(),
         latitude: parseFloat(faker.address.latitude()),
