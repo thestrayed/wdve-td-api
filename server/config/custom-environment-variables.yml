@@ -1,8 +1,24 @@
 wdve-td:
-  port: PORT
+  port:
+    __name: PORT
+    __format: json
   database:
     dialect: DB_DIALECT
     name: DB_NAME
     host: DB_HOST
     username: DB_USERNAME
     password: DB_PASSWORD
+  authentication:
+    secret:
+      cache:
+        __name: AUTHENTICATION_SECRET_CACHE
+        __format: json
+      rateLimit:
+        __name: AUTHENTICATION_SECRET_RATE_LIMIT
+        __format: json
+      jwksRequestsPerMinute:
+        __name: AUTHENTICATION_SECRET_JWKS_REQUEST_PER_MINUTE
+        __format: json
+      jwksUri: AUTHENTICATION_SECRET_JWKS_URI
+    audience: AUTHENTICATION_AUDIENCE
+    issuer: AUTHENTICATION_ISSUER

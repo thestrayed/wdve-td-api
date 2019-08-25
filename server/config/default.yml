@@ -7,3 +7,11 @@ wdve-td:
     database: postgres
     username: postgres
     password: null
+  authentication:
+    secret:
+      cache: true
+      rateLimit: true
+      jwksRequestsPerMinute: 5
+      jwksUri: __JWKS_URI__
+    audience: __AUDIENCE__
+    issuer: __ISSUER__
