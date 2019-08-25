@@ -5,10 +5,7 @@ export interface BaseCreateOptions extends CreateOptions {}
 export interface BaseFindOptions extends FindOptions {}
 export interface BaseUpdateOptions extends UpdateOptions {}
 
-export interface BaseModel<T> extends Model<T>  {
-    createdAt: string;
-    updatedAt: string;
-}
+export interface BaseModel<T> extends Model<T>  {}
 
 export interface BaseModelAttributes {
     id: number;
