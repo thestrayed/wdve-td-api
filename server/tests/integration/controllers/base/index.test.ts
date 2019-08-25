@@ -10,7 +10,6 @@ describe('GET /api/health', () => {
         const result = await request(app)
             .get(URL);
 
-        expect(result.body.data).toEqual({});
         expect(result.status).toEqual(HttpStatus.OK);
     });
 });
