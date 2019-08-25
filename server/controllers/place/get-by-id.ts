@@ -15,6 +15,6 @@ export async function getById(req: Request, res: Response): Promise<Response> {
 
 export const getByIdRequestSchema = {
     params: {
-        id: Joi.number().required(),
+        id: Joi.string().required(),
     },
 };
