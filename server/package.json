@@ -66,8 +66,9 @@
         "umzug": "2.2.0"
     },
     "_moduleAliases": {
-        "@controllers": "controllers",
         "@config": "config/config.json",
+        "@constants": "constants",
+        "@controllers": "controllers",
         "@errors": "errors",
         "@factory": "tests/factory",
         "@middlewares": "middlewares",
