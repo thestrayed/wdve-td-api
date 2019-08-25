@@ -2,7 +2,7 @@ import config from 'config';
 import express from 'express';
 import HttpStatus from 'http-status';
 
-import { errorHandler } from '@middlewares';
+import { errorHandler, jwtValidation } from '@middlewares';
 import router from '@routes';
 
 const app = express();
@@ -14,6 +14,8 @@ app.use(express.json({ limit: config.get('wdve-td.limit') }));
 app.get('/api/health', (_req, res) => {
     res.status(HttpStatus.OK).send();
 });
+
+app.use(jwtValidation());
 
 app.use(router);
 
