@@ -43,10 +43,6 @@ jobs:
       - *yarn
       - *yarn_save_cache
       - run: yarn ci:test:unit
-      - store_test_results:
-          path: ./.reports
-      - store_artifacts:
-          path: ./.reports
   run_integration_tests:
     <<: *integration_workspace
     steps:
@@ -56,10 +52,6 @@ jobs:
       - *yarn
       - *yarn_save_cache
       - run: yarn ci:test:integration
-      - store_test_results:
-          path: ./.reports
-      - store_artifacts:
-          path: ./.reports
 workflows:
   version: 2
   linters_and_tests:
