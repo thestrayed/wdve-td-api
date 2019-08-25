@@ -5,6 +5,8 @@ import {
     getAllRequestSchema,
     getById,
     getByIdRequestSchema,
+    update,
+    updateRequestSchema,
 } from '@controllers/place';
 import { createJoiValidation } from '@middlewares';
 import { Route } from '@typings/utilities';
@@ -34,5 +36,13 @@ export const placeRoutes: Route[]  = [
         ],
         handler: getById,
 
+    },
+    {
+        path: '/api/places/:id',
+        method: 'PUT',
+        middleware: [
+            createJoiValidation(updateRequestSchema),
+        ],
+        handler: update,
     },
 ];
