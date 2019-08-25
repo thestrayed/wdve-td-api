@@ -24,7 +24,12 @@ class PlaceService implements IPlaceService<PlaceModel, PartialPlace> {
     }
 
     async getById(id: number): Promise<PlaceModel> {
-        return (db.Place as PlaceModelStatic).findByPk(id);
+        const place = await (db.Place as PlaceModelStatic).findByPk(id);
+        if (!place) {
+            throw new NotFoundError('Place not found');
+        }
+
+        return place;
     }
 
     async update(updateObj: PartialPlace, whereObj: PartialPlace, options: BaseUpdateOptions = {} as BaseUpdateOptions): Promise<PlaceModel> {
